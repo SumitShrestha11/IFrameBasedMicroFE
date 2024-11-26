@@ -1,0 +1,12 @@
+{
+  "clientA": {
+    "logo": "/logos/clientA.png",
+    "primaryColor": "#4CAF50",
+    "theme": "light"
+  },
+  "clientB": {
+    "logo": "/logos/clientB.png",
+    "primaryColor": "#FF5722",
+    "theme": "dark"
+  }
+}
