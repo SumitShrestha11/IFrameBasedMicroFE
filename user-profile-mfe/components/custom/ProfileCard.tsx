@@ -9,7 +9,10 @@ import { Card, CardContent } from "../ui/card";
 import { Input } from "../ui/input";
 
 const ProfileCard = () => {
-  const [userData, setUserData] = useState({ name: "", email: "" });
+  const [userData, setUserData] = useState({
+    name: "Test User",
+    email: "test@user.com",
+  });
   const [isEditing, setIsEditing] = useState(false);
   const { selectedBranding, setSelectedBranding } = useGlobalState();
 

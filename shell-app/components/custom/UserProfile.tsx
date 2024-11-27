@@ -18,6 +18,20 @@ const UserProfile = () => {
           process.env.NEXT_PUBLIC_PROFILE_APP_URL ?? "http://localhost:5001"
         );
     }
+    const timeout = setTimeout(() => {
+      if (selectedBranding) {
+        document
+          .getElementById("user-profile-iframe")
+          ?.contentWindow?.postMessage(
+            {
+              type: "SET_BRANDING",
+              payload: { branding: selectedBranding },
+            },
+            process.env.NEXT_PUBLIC_PROFILE_APP_URL ?? "http://localhost:5001"
+          );
+      }
+    }, 300);
+    return () => clearTimeout(timeout);
   }, [selectedBranding]);
 
   useEffect(() => {
