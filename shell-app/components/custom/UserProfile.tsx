@@ -15,7 +15,7 @@ const UserProfile = () => {
             type: "SET_BRANDING",
             payload: { branding: selectedBranding },
           },
-          process.env.NEXT_PUBLIC_PROFILE_APP_URL
+          process.env.NEXT_PUBLIC_PROFILE_APP_URL ?? "http://localhost:5001"
         );
     }
   }, [selectedBranding]);

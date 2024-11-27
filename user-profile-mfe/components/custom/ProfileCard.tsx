@@ -25,10 +25,6 @@ const ProfileCard = () => {
           setUserData(event.data.payload);
           break;
         case "SET_BRANDING":
-          document.documentElement.style.setProperty(
-            "--primary-color",
-            event.data.payload.branding.primaryColor
-          );
           setSelectedBranding(event.data.payload.branding);
           setTheme(event.data.payload.branding.theme);
           break;
@@ -41,6 +37,13 @@ const ProfileCard = () => {
       window.removeEventListener("message", handleEvent);
     };
   }, []);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--primary-color",
+      selectedBranding?.primaryColor
+    );
+  }, [selectedBranding]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
