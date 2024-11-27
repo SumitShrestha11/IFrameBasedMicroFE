@@ -46,7 +46,7 @@ const ProfileCard = () => {
     e.preventDefault();
     window.parent.postMessage(
       { type: "UPDATE_USER_DATA_IN_SHELL", payload: userData },
-      "http://localhost:5000"
+      process.env.NEXT_PUBLIC_SHELL_APP_URL ?? "http://localhost:5000"
     );
 
     setIsEditing(false);

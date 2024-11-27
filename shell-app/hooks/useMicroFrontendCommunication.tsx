@@ -13,32 +13,7 @@ export const useMicrofrontendCommunication = () => {
           globalState.setUnreadNotificationsCount(event.data.payload);
           break;
 
-        case MessageTypes.SEND_BRANDING_STATE:
-          // Send current branding state to microfrontends
-          document
-            .getElementById("user-profile-iframe")
-            ?.contentWindow.postMessage(
-              {
-                type: "GLOBAL_STATE",
-                payload: {
-                  branding: globalState.selectedBranding,
-                },
-              },
-              process.env.PROFILE_APP_URL ?? "http://localhost:5001"
-            );
-          document
-            .getElementById("notification-iframe")
-            ?.contentWindow?.postMessage(
-              {
-                type: "GLOBAL_STATE",
-                payload: {
-                  branding: globalState.selectedBranding,
-                },
-              },
-              process.env.NOTIFICATION_APP_URL ?? "http://localhost:5002"
-            );
-
-        case "GET_NOTIFICATIONS":
+        case MessageTypes.GET_NOTIFICATIONS: {
           const fetchNotifications = async () => {
             const res = await fetch("/api/notifications");
             if (res.ok) {
@@ -61,8 +36,9 @@ export const useMicrofrontendCommunication = () => {
 
           fetchNotifications();
           break;
+        }
 
-        case "UPDATE_NOTIFICATION_READ_STATUS":
+        case MessageTypes.UPDATE_NOTIFICATION_READ_STATUS: {
           const updateNotificationReadStatus = async () => {
             const res = await fetch("/api/notifications", {
               method: "POST",
@@ -81,8 +57,9 @@ export const useMicrofrontendCommunication = () => {
 
           updateNotificationReadStatus();
           break;
+        }
 
-        case "UPDATE_USER_DATA_IN_SHELL":
+        case MessageTypes.UPDATE_USER_DATA_IN_SHELL:
           fetch("/api/user", {
             method: "PUT",
             headers: {
